@@ -1,24 +1,19 @@
 import fastify from "fastify";
-import { z } from "zod";
-import { PrismaClient } from '@prisma/client';
+import { createPoll } from "./routes/create-poll";
+import { getPoll } from "./routes/get-pooll";
+import { voteOnPoll } from "./routes/vote-on-poll";
+import cookie from "@fastify/cookie";
 
 const app = fastify();
-const prisma = new PrismaClient();
 
-app.post('/polls', async (request, reply) => {
-    const createPollBody = z.object({
-        title: z.string()
-    });
-    const { title } = createPollBody.parse(request.body);
+app.register(cookie, {
+    secret: 'key-polls',
+    hook: 'onRequest',
+})
 
-    const poll = await prisma.poll.create({
-        data: {
-            title,
-        }
-    })
-
-    return reply.status(201).send({ pollId: poll.id });
-});
+app.register(createPoll);
+app.register(getPoll);
+app.register(voteOnPoll);
 
 app.listen({port: 3333}).then(() => {
     console.log('I am here');
