@@ -1,8 +1,4 @@
 
-<div align="center"> 
-  <img src="./project/websocket.png" width="1604" height="auto" />
-</div>
-
 ## Project
 
 This project is an API for a real-time voting system where users can create polls and cast their votes.
@@ -29,7 +25,7 @@ The system dynamically generates a ranking among the poll options and updates th
 - Clone the repository
 
 ```bash
-git clone https://github.com/denison3965/real-time-voting-system.git
+git clone https://github.com/denison3965/polls.git
 ```
 
 - Install dependencies
