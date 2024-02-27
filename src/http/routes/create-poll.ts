@@ -4,6 +4,7 @@ import { prisma } from "../../lib/prisma";
 
 export async function createPoll(app: FastifyInstance) {
     app.post('/polls', async (request, reply) => {
+        return reply.status(201).send({message: "get it"})
         const createPollBody = z.object({
             title: z.string(),
             options: z.array(z.string())
